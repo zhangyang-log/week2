@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangtao.mapper.WorkerMapper">
+	<insert id="addWorker" parameterType="Worker">
+		insert into
+		workers(wid,wname,whear,workname,produces,addr,money,wtime,ntime)
+		value(#{wid},#{wname},#{whear},#{workname},#{produces},#{addr},#{money},#{wtime},#{ntime});
+	</insert>
+	<select id="queryAll" resultType="Worker">
+		select * from workers
+		<where>
+			<if test="wid!=null and wid!=''">
+				wid like "%${wid}%"
+			</if>
+			<if test="wname!=null and wname!=''">
+				and wname like "%${wname}%"
+			</if>
+			<if test="whear!=null and whear!=''">
+				and whear like "%${whear}%"
+			</if>
+			<if test="whear!=null and whear!=''">
+				and whear like "%${whear}%"
+			</if>
+			<if test="workname!=null and workname!=''">
+				and workname like "%${workname}%"
+			</if>
+			<if test="workname!=null and workname!=''">
+				and workname like "%${workname}%"
+			</if>
+			<if test="produces!=null and produces!=''">
+				and produces like "%${produces}%"
+			</if>
+			<if test="addr!=null and addr!=''">
+				and addr like "%${addr}%"
+			</if>
+			<if test="ntype!=null and ntype!=''">
+				and ntype=#{ntype}
+			</if>
+			<if test="wtime1!=null and wtime2!='' and wtime2!=null and wtime1!='' ">
+				and wtime between#{wtime1} and #{wtime2}
+			</if>
+			<if test="ntime1!=null and ntime2!='' and ntime2!=null and ntime1!='' ">
+				and ntime between #{ntime1} and #{ntime2}
+			</if>
+			<if test="money1!=null and money1!='' and money2!=null and money2!='' ">
+				and money between #{money1} and #{money2}
+			</if>
+		</where>
+	</select>
+	<select id="queryOne" resultType="Worker">
+		select * from workers where
+		wid=#{wid};
+	</select>
+
+	<update id="update" parameterType="Wroker">
+		update workers set
+		wname=#{wname},whear=#{whear},workname=#{workname},produces=#{produces},addr=#{addr},money=#{money},wtime=#{wtime},ntime=#{ntime},ntype=#{ntype}
+		where wid=#{wid}
+	</update>
+</mapper>
